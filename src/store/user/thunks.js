@@ -12,7 +12,8 @@ export const signUp = (email, password) => {
         password
       );
       console.log("sign up response:", response);
-      dispatch(setUser(response.user));
+      const user = { user: response.user, token: response.user.accessToken };
+      dispatch(setUser(user));
     } catch (e) {
       console.log(e.message);
     }
