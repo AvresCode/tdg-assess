@@ -1,13 +1,22 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { SignIn } from "../store/user/thunks";
+
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(SignIn(email, password));
+  };
 
   return (
     <div className="signup-container">
       <h2> Login</h2>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div>
           {" "}
           <input

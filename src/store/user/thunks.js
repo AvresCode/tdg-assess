@@ -1,5 +1,9 @@
 import { setUser } from "./slice";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  updateProfile,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import { auth, db } from "../../config/firebase";
 import { setDoc, doc } from "firebase/firestore";
 //
@@ -28,6 +32,22 @@ export const signUp = (email, password, name, lastName) => {
         lastName: lastName,
         name: name,
       });
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
+};
+
+//
+export const SignIn = (email, password) => {
+  return async (dispatch, getState) => {
+    try {
+      const response = await signInWithEmailAndPassword(auth, email, password);
+
+      console.log("sign In response:", response);
+      const user = response.user;
+      const token = user.accessToken;
+      dispatch(setUser({ user, token }));
     } catch (e) {
       console.log(e.message);
     }
