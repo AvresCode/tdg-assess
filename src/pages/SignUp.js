@@ -1,16 +1,30 @@
 import { useState } from "react";
+import { signUp } from "../store/user/thunks";
+import { useDispatch } from "react-redux";
 
 export const SignUp = () => {
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+
+  //
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(signUp(email, password, name, lastName));
+
+    setName("");
+    setLastName("");
+    setEmail("");
+    setPassword("");
+  };
 
   return (
     <div className="signup-container">
       <h2> Register</h2>
       <p> Please enter your details</p>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div>
           {" "}
           <input
