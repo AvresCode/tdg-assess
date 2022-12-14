@@ -18,7 +18,7 @@ export const SignUp = () => {
   //
   useEffect(() => {
     if (token !== null) {
-      navigate("/");
+      navigate("/login");
     }
   }, [token, navigate]);
 
