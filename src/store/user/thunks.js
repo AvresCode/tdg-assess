@@ -1,8 +1,9 @@
-import { setUser } from "./slice";
+import { setUser, clearUserData } from "./slice";
 import {
   createUserWithEmailAndPassword,
   updateProfile,
   signInWithEmailAndPassword,
+  signOut,
 } from "firebase/auth";
 import { auth, db } from "../../config/firebase";
 import { setDoc, doc } from "firebase/firestore";
@@ -48,6 +49,18 @@ export const SignIn = (email, password) => {
       const user = response.user;
       const token = user.accessToken;
       dispatch(setUser({ user, token }));
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
+};
+
+export const logout = () => {
+  return async (dispatch, getState) => {
+    try {
+      await signOut(auth);
+
+      dispatch(clearUserData());
     } catch (e) {
       console.log(e.message);
     }
