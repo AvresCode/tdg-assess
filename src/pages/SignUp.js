@@ -1,4 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { signUp } from "../store/user/thunks";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { selectToken } from "../store/user/selectors";
 
 export const SignUp = () => {
   const [name, setName] = useState("");
@@ -6,11 +10,34 @@ export const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  //
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const token = useSelector(selectToken);
+
+  //
+  useEffect(() => {
+    if (token !== null) {
+      navigate("/");
+    }
+  }, [token, navigate]);
+
+  //
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(signUp(email, password, name, lastName));
+
+    setName("");
+    setLastName("");
+    setEmail("");
+    setPassword("");
+  };
+
   return (
     <div className="signup-container">
       <h2> Register</h2>
       <p> Please enter your details</p>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div>
           {" "}
           <input
