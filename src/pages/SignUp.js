@@ -9,6 +9,7 @@ export const SignUp = () => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [file, setFile] = useState(null);
 
   //
   const dispatch = useDispatch();
@@ -25,12 +26,13 @@ export const SignUp = () => {
   //
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(signUp(email, password, name, lastName));
+    dispatch(signUp(email, password, name, lastName, file));
 
     setName("");
     setLastName("");
     setEmail("");
     setPassword("");
+    setFile(null);
   };
 
   return (
@@ -75,6 +77,15 @@ export const SignUp = () => {
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            required
+          ></input>
+        </div>
+        <div>
+          {" "}
+          <input
+            type="file"
+            placeholder="Upload photo"
+            onChange={(e) => setFile(e.target.files[0])}
             required
           ></input>
         </div>

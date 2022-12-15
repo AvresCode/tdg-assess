@@ -7,8 +7,11 @@ import {
 } from "firebase/auth";
 import { auth, db } from "../../config/firebase";
 import { setDoc, doc, getDoc } from "firebase/firestore";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { storage } from "../../config/firebase";
+
 //
-export const signUp = (email, password, name, lastName) => {
+export const signUp = (email, password, name, lastName, file) => {
   return async (dispatch, get) => {
     try {
       const response = await createUserWithEmailAndPassword(
@@ -17,22 +20,44 @@ export const signUp = (email, password, name, lastName) => {
         password
       );
       //console.log("sign up response:", response.user);
-      // const user = { user: response.user, token: response.user.accessToken };
+
+      // Create a reference with an initial file path and name
+      const storageRef = ref(storage, `images/${Date.now() + name}`);
+
+      // Upload the file and metadata
+      const uploadTask = uploadBytesResumable(storageRef, file);
+
+      //monitor upload progress
+      uploadTask.on(
+        (error) => {
+          console.log(error.message);
+        },
+        () => {
+          // Handle successful uploads on complete
+          getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+            //update user profile
+            await updateProfile(user, {
+              displayName: name,
+              photoURL: downloadURL,
+            });
+
+            //store user data in firestore
+            await setDoc(doc(db, "users", user.uid), {
+              uid: user.uid,
+              email: email,
+              displayName: name,
+              lastName: lastName,
+              name: name,
+            });
+          });
+        }
+      );
+
       const user = response.user;
       const token = user.accessToken;
+
+      // const user = { user: response.user, token: response.user.accessToken };
       dispatch(setUser({ user, token }));
-
-      //update user profile
-      await updateProfile(user, { displayName: name });
-
-      //store user data in firestore
-      await setDoc(doc(db, "users", user.uid), {
-        uid: user.uid,
-        email: email,
-        displayName: name,
-        lastName: lastName,
-        name: name,
-      });
     } catch (e) {
       console.log(e.message);
     }
