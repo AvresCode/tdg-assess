@@ -6,7 +6,7 @@ import {
   signOut,
 } from "firebase/auth";
 import { auth, db } from "../../config/firebase";
-import { setDoc, doc } from "firebase/firestore";
+import { setDoc, doc, getDoc } from "firebase/firestore";
 //
 export const signUp = (email, password, name, lastName) => {
   return async (dispatch, get) => {
@@ -61,6 +61,30 @@ export const logout = () => {
       await signOut(auth);
 
       dispatch(clearUserData());
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
+};
+
+//
+export const getUserData = (id) => {
+  return async (dispatch, getState) => {
+    try {
+      const docRef = doc(db, "users", id);
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        console.log("Document data:", docSnap.data());
+
+        const userData = docSnap.data();
+        const userToken = auth.currentUser.accessToken;
+
+        dispatch(setUser({ user: userData, token: userToken }));
+      } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+      }
     } catch (e) {
       console.log(e.message);
     }
