@@ -1,2 +1,2 @@
-export const selectToken = (state) => state.user.token;
-export const selectUser = (state) => state.user.user;
+export const selectToken = (state) => state.userReducer.token;
+export const selectUser = (state) => state.userReducer.user;
