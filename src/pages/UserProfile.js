@@ -5,7 +5,7 @@ import { getUserData } from "../store/user/thunks";
 import { selectUser } from "../store/user/selectors";
 
 export const UserProfile = () => {
-  const userId = auth.currentUser.uid;
+  const userId = auth?.currentUser?.uid;
   // console.log("userId", userId);
 
   const userData = useSelector(selectUser);
@@ -17,13 +17,18 @@ export const UserProfile = () => {
   //
   console.log("userData", userData);
   //destructuring userData
-  const { name, lastName, email } = userData;
+
   return (
     <div>
       <h2> User Information</h2>
-      <div>First name : {name}</div>
-      <div> Last name : {lastName}</div>
-      <div> Email : {email}</div>
+      {userData && (
+        <div>
+          {" "}
+          <div>First name : {userData.name}</div>
+          <div> Last name : {userData.lastName}</div>
+          <div> Email : {userData.email}</div>
+        </div>
+      )}
     </div>
   );
 };
