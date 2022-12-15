@@ -8,28 +8,35 @@ import { UserProfile } from "./pages/UserProfile";
 import { useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./config/firebase";
-import { useDispatch } from "react-redux";
-import { setUser, clearUserData } from "./store/user/slice";
+import { useDispatch, useSelector } from "react-redux";
+import { setUser } from "./store/user/slice";
+import { Navigate } from "react-router-dom";
+import { selectToken } from "./store/user/selectors";
 
 function App() {
+  //
+  const token = useSelector(selectToken);
+
   const dispatch = useDispatch();
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      // dispatch(setUser({ user, token }));
-      console.log("user", currentUser);
+      // console.log("user", currentUser);
+
       if (currentUser) {
         dispatch(
           setUser({ user: currentUser, token: currentUser.accessToken })
         );
       } else {
-        dispatch(clearUserData());
+        dispatch(setUser({ user: null, token: null }));
       }
     });
+
     return () => {
       unsubscribe();
     };
   }, [dispatch]);
 
+  //
   return (
     <div className="App">
       <Navbar />
@@ -37,7 +44,10 @@ function App() {
         <Route path="/" element={<Homapage />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/myProfile" element={<UserProfile />} />
+        <Route
+          path="/myProfile"
+          element={token ? <UserProfile /> : <Navigate to="/" />}
+        />
       </Routes>
     </div>
   );
