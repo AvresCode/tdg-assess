@@ -16,9 +16,14 @@ export const UserProfile = () => {
   }, [dispatch, userId]);
   //
   console.log("userData", userData);
+  //destructuring userData
+  const { name, lastName, email } = userData;
   return (
     <div>
       <h2> User Information</h2>
+      <div>First name : {name}</div>
+      <div> Last name : {lastName}</div>
+      <div> Email : {email}</div>
     </div>
   );
 };

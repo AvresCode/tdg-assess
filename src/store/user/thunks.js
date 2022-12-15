@@ -16,7 +16,7 @@ export const signUp = (email, password, name, lastName) => {
         email,
         password
       );
-      console.log("sign up response:", response.user);
+      //console.log("sign up response:", response.user);
       // const user = { user: response.user, token: response.user.accessToken };
       const user = response.user;
       const token = user.accessToken;
@@ -45,7 +45,7 @@ export const SignIn = (email, password) => {
     try {
       const response = await signInWithEmailAndPassword(auth, email, password);
 
-      console.log("sign In response:", response);
+      //  console.log("sign In response:", response);
       const user = response.user;
       const token = user.accessToken;
       dispatch(setUser({ user, token }));
@@ -67,7 +67,7 @@ export const logout = () => {
   };
 };
 
-//
+// get user data from firestore
 export const getUserData = (id) => {
   return async (dispatch, getState) => {
     try {
@@ -75,14 +75,14 @@ export const getUserData = (id) => {
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
-        console.log("Document data:", docSnap.data());
+        // console.log("Document data:", docSnap.data());
 
         const userData = docSnap.data();
         const userToken = auth.currentUser.accessToken;
 
         dispatch(setUser({ user: userData, token: userToken }));
       } else {
-        // doc.data() will be undefined in this case
+        //doc.data() will be undefined in this case
         console.log("No such document!");
       }
     } catch (e) {
