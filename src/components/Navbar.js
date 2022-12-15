@@ -16,6 +16,13 @@ export const Navbar = () => {
         </Link>
       </div>
       <div>
+        {token && (
+          <Link to="/myProfile" className="nav-item">
+            My Profile
+          </Link>
+        )}
+      </div>
+      <div>
         {" "}
         {token ? (
           <button className="nav-item" onClick={() => dispatch(logout())}>
