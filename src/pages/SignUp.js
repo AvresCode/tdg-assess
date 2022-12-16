@@ -75,12 +75,14 @@ export const SignUp = () => {
           required
           className="signup-input"
         ></input>{" "}
-        <input
-          type="file"
-          placeholder="Upload photo"
-          onChange={(e) => setFile(e.target.files[0])}
-          required
-        ></input>
+        <div>
+          <label for="file">Choose a photo: </label>
+          <input
+            type="file"
+            onChange={(e) => setFile(e.target.files[0])}
+            className="input-file"
+          />
+        </div>
         <br />
         <button type="submit" className="submit-button">
           {" "}
