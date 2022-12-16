@@ -1,0 +1,14 @@
+.user-profile-container {
+  margin: 5%;
+  background-color: rgb(245, 237, 231);
+  padding: 1rem;
+  border-radius: 1rem;
+}
+
+img {
+  border-radius: 1rem;
+  width: 180px;
+}
+.user-data {
+  padding: 0.5rem;
+}

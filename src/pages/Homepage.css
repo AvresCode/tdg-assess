@@ -1,0 +1,17 @@
+.home-container {
+  background-color: rgb(222, 210, 201);
+  text-align: center;
+  /* display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; */
+  height: 20vh;
+  margin: 5%;
+  padding: 1rem;
+  border-radius: 1rem;
+}
+@media only screen and (min-width: 768px) {
+  .home-container {
+    margin: 15%;
+  }
+}

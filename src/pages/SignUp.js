@@ -3,6 +3,7 @@ import { signUp } from "../store/user/thunks";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { selectToken } from "../store/user/selectors";
+import "./SignUp.css";
 
 export const SignUp = () => {
   const [name, setName] = useState("");
@@ -39,58 +40,56 @@ export const SignUp = () => {
     <div className="signup-container">
       <h2> Register</h2>
       <p> Please enter your details</p>
-      <form onSubmit={handleSubmit}>
+
+      <form onSubmit={handleSubmit} className="signup-items">
+        {" "}
+        <input
+          type="text"
+          placeholder="Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+          className="signup-input"
+        ></input>{" "}
+        <input
+          type="text"
+          placeholder="Last Name"
+          value={lastName}
+          onChange={(e) => setLastName(e.target.value)}
+          required
+          className="signup-input"
+        ></input>{" "}
+        <input
+          type="text"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+          className="signup-input"
+        ></input>{" "}
+        <input
+          type="text"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+          className="signup-input"
+        ></input>{" "}
         <div>
-          {" "}
-          <input
-            type="text"
-            placeholder="Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          ></input>
-        </div>
-        <div>
-          {" "}
-          <input
-            type="text"
-            placeholder="Last Name"
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-            required
-          ></input>
-        </div>
-        <div>
-          {" "}
-          <input
-            type="text"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          ></input>
-        </div>
-        <div>
-          {" "}
-          <input
-            type="text"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          ></input>
-        </div>
-        <div>
-          {" "}
+          <label for="file" style={{ fontSize: "1rem" }}>
+            Choose a photo:{" "}
+          </label>
           <input
             type="file"
-            placeholder="Upload photo"
             onChange={(e) => setFile(e.target.files[0])}
-            required
-          ></input>
+            className="input-file"
+          />
         </div>
         <br />
-        <button type="submit"> Create Account</button>
+        <button type="submit" className="submit-button">
+          {" "}
+          Create Account
+        </button>
       </form>
     </div>
   );
