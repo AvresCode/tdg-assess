@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { SignIn } from "../store/user/thunks";
 import { useNavigate } from "react-router-dom";
 import { selectToken } from "../store/user/selectors";
+import "./SignUp.css";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
@@ -27,29 +28,29 @@ export const Login = () => {
   return (
     <div className="signup-container">
       <h2> Login</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          {" "}
-          <input
-            type="text"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          ></input>
-        </div>
-        <div>
-          {" "}
-          <input
-            type="text"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          ></input>
-        </div>
+      <form onSubmit={handleSubmit} className="signup-items">
+        {" "}
+        <input
+          type="text"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+          className="signup-input"
+        ></input>{" "}
+        <input
+          type="text"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+          className="signup-input"
+        ></input>
         <br />
-        <button type="submit"> Login</button>
+        <button type="submit" className="submit-button">
+          {" "}
+          Login
+        </button>
       </form>
       <div>
         {" "}

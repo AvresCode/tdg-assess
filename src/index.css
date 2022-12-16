@@ -1,13 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=EB+Garamond&family=Gideon+Roman&family=Merriweather:ital,wght@0,300;1,300&family=Playfair+Display:wght@500&family=Space+Grotesk&display=swap");
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: "EB Garamond", serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(to right, rgb(187, 212, 213), #497374);
+  /* background-color: #c6d8d5; */
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }

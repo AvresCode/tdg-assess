@@ -16,7 +16,6 @@ export const UserProfile = () => {
   }, [dispatch, userId]);
   //
   console.log("userData", userData);
-  //destructuring userData
 
   return (
     <div>
