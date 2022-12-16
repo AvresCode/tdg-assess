@@ -3,9 +3,11 @@
 body {
   margin: 0;
   font-family: "EB Garamond", serif;
+  font-size: 1.2rem;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: linear-gradient(to right, rgb(187, 212, 213), #497374);
+  background-image: linear-gradient(to right, rgb(187, 212, 213), #678787);
+
   /* background-color: #c6d8d5; */
 }
 

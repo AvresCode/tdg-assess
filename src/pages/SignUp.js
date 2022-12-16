@@ -76,7 +76,9 @@ export const SignUp = () => {
           className="signup-input"
         ></input>{" "}
         <div>
-          <label for="file">Choose a photo: </label>
+          <label for="file" style={{ fontSize: "1rem" }}>
+            Choose a photo:{" "}
+          </label>
           <input
             type="file"
             onChange={(e) => setFile(e.target.files[0])}

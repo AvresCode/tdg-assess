@@ -11,11 +11,13 @@
 .nav-item {
   text-decoration: none;
   color: rgb(231, 235, 237);
-  font-size: 1.3rem;
   padding: 0.5rem;
   margin-right: 0.5rem;
   border-radius: 1.5rem;
+  border: none;
+  font-family: "EB Garamond", serif;
 }
+
 .nav-item:hover {
   background-color: rgb(81, 145, 142);
 }
