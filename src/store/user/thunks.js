@@ -48,6 +48,7 @@ export const signUp = (email, password, name, lastName, file) => {
               displayName: name,
               lastName: lastName,
               name: name,
+              photoURL: downloadURL,
             });
           });
         }

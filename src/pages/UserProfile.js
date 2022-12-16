@@ -24,6 +24,9 @@ export const UserProfile = () => {
       {userData && (
         <div>
           {" "}
+          <div>
+            <img src={userData.photoURL} alt="" style={{ width: "200px" }} />
+          </div>
           <div>First name : {userData.name}</div>
           <div> Last name : {userData.lastName}</div>
           <div> Email : {userData.email}</div>
